@@ -151,6 +151,7 @@ func updateGroupItem(item binding.DataItem, object fyne.CanvasObject) {
 
 // 运行或暂停
 func runOrStop(button *widget.Button, a *fyne.App, w fyne.Window) {
+	button.Disable()
 	runStatus = !runStatus
 	if runStatus {
 		config.SaveLocalCache()
@@ -166,6 +167,7 @@ func runOrStop(button *widget.Button, a *fyne.App, w fyne.Window) {
 		service.CloseSshClient()
 		closeLogWin()
 	}
+	button.Enable()
 }
 
 // 构建日志窗口
