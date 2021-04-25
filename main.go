@@ -56,7 +56,7 @@ func buildMainWindow(a *fyne.App) {
 	w.ShowAndRun()
 }
 
-//设置中文字体
+// 设置中文字体
 func setFont() {
 	err := os.Setenv(fontEnv, config.Yml.Log.FontPath)
 	if err != nil {
