@@ -5,6 +5,7 @@ import (
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"os"
+	"runtime"
 	"we2log/model/log"
 )
 
@@ -16,6 +17,7 @@ type YmlConfig struct {
 
 type LogConfig struct {
 	Lines    int      `yaml:"lines"`
+	FontPath string   `yaml:"font-path"`
 	FontSize float32  `yaml:"font-size"`
 	Group    *[]Group `yaml:"group"`
 }
@@ -48,6 +50,19 @@ func InitYaml() {
 	appYmlPath := fmt.Sprintf("%s/.we2log/config.yml", dir)
 	var yml = new(YmlConfig)
 	readYml(appYmlPath, yml)
+
+	// 设置默认字体
+	if yml.Log.FontPath == "" {
+		var fontPath string
+		sysType := runtime.GOOS
+		if sysType == "darwin" {
+			fontPath = "/System/Library/Fonts/Supplemental/Arial Unicode.ttf"
+		}
+		if sysType == "windows" {
+			fontPath = "C:/Windows/fonts/simhei.ttf"
+		}
+		yml.Log.FontPath = fontPath
+	}
 	Yml = yml
 }
 

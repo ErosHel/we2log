@@ -5,7 +5,6 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"os"
-	"runtime"
 	"strings"
 	"we2log/config"
 	"we2log/model/log"
@@ -59,14 +58,7 @@ func buildMainWindow(a *fyne.App) {
 
 //设置中文字体
 func setFont() {
-	sysType := runtime.GOOS
-	var err error
-	if sysType == "darwin" {
-		err = os.Setenv(fontEnv, "/System/Library/Fonts/Supplemental/Arial Unicode.ttf")
-	}
-	if sysType == "windows" {
-		err = os.Setenv(fontEnv, "C:/Windows/fonts/simhei.ttf")
-	}
+	err := os.Setenv(fontEnv, config.Yml.Log.FontPath)
 	if err != nil {
 		log.Error(fmt.Sprintf("字体变量设置错误: %v", err))
 	}
