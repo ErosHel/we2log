@@ -202,6 +202,7 @@ func closeLogWin() {
 	for _, window := range logWin {
 		window.Close()
 	}
+	logWin = make([]fyne.Window, 0)
 }
 
 // 主题切换
