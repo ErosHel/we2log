@@ -9,16 +9,17 @@
 ### 主设置界面
 
 多个分组对应如同多个微服务
-![image](./doc/img/we2log_main.png)
 
+<img src="./doc/img/we2log_main.png" style="width: 400px;"/>
 ### 分组ssh链接界面
 
 可添加和修改ssh链接
-![image](./doc/img/we2log_ssh.png)
+
+<img src="./doc/img/we2log_ssh.png" style="width: 400px;"/>
 
 ### ssh链接添加或修改界面
 
-![image](./doc/img/we2log_ssh_add.png)
+<img src="./doc/img/we2log_ssh_add.png" style="width: 400px;"/>
 
 ### 日志打印界面
 
@@ -26,6 +27,7 @@
 ![image](./doc/img/we2log_log.png)
 
 ## 日志窗口快捷键
+
 - <kbd>F</kbd> 全屏切换
 - <kbd>空格</kbd> 暂停接收日志
 
