@@ -1,9 +1,10 @@
 package service
 
 import (
+	"bufio"
 	"fmt"
 	"io"
-	"strings"
+	"regexp"
 	"time"
 	"we2log/config"
 	"we2log/model/_ssh"
@@ -89,32 +90,26 @@ func IsGroupOn(g string) bool {
 
 // 推送消息
 func pushMsg(name string, out *io.Reader, group string) {
-	msgBuf := make([]byte, 1096)
 	msgChan := MsgChanMap[group]
 	if msgChan == nil {
 		msgChan = make(chan string, 10)
 		MsgChanMap[group] = msgChan
 	}
+	reader := bufio.NewReader(*out)
 	for {
-		i, err := (*out).Read(msgBuf)
+		// 最长1096
+		s, err := reader.ReadString('\n')
 		if err != nil {
 			log.Warn(fmt.Sprintf("ssh推送消息错误或已停止: %v", err))
 			return
 		}
-		s := string(msgBuf)[:i]
+		mc := regexp.MustCompile("[\n\t]")
+		bytes := mc.ReplaceAll([]byte(s), []byte(""))
+		s = string(bytes)
 		if s == "" {
 			continue
 		}
-		if strings.Contains(s, "\n") {
-			for _, str := range strings.Split(s, "\n") {
-				if str == "" {
-					continue
-				}
-				msgChan <- fmt.Sprintf("%s: %s", name, str)
-			}
-		} else {
-			msgChan <- s
-		}
+		msgChan <- fmt.Sprintf("%s: %s", name, s)
 	}
 }
 

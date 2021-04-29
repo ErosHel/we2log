@@ -68,8 +68,8 @@ func getGroupSshBindList(group string) binding.StringList {
 		if g.Name == group {
 			ss := make([]string, len(*g.Ssh))
 			for si, ssh := range *g.Ssh {
-				// [ssh名称][是否选中][分组坐标][链接坐标]
-				ss[si] = fmt.Sprintf("%s,%t,%d,%d", ssh.Name, ssh.OnOff, i, si)
+				// [ssh名称][分组坐标][链接坐标]
+				ss[si] = fmt.Sprintf("%s,%d,%d", ssh.Name, i, si)
 			}
 			list := binding.NewStringList()
 			_ = list.Set(ss)
@@ -100,22 +100,22 @@ func updateSshItem(item binding.DataItem, object fyne.CanvasObject, w fyne.Windo
 	label := con.Objects[0].(*widget.Label)
 	bStr := item.(binding.String)
 	s, _ := bStr.Get()
-	// [ssh名称][是否选中][分组坐标][链接坐标]
+	// [ssh名称][分组坐标][链接坐标]
 	ss := strings.Split(s, ",")
 	label.SetText(ss[0])
 	check := con.Objects[1].(*widget.Check)
-	onOff := ss[1] == "true"
+	i, _ := strconv.Atoi(ss[1])
+	si, _ := strconv.Atoi(ss[2])
+	onOff := (*(*config.Yml.Log.Group)[i].Ssh)[si].OnOff
 	check.SetChecked(onOff)
-	i, _ := strconv.Atoi(ss[2])
-	si, _ := strconv.Atoi(ss[3])
 	// 改变开启状态
 	check.OnChanged = func(sel bool) {
 		(*(*config.Yml.Log.Group)[i].Ssh)[si].OnOff = sel
 	}
 	btn := con.Objects[2].(*widget.Button)
 	btn.OnTapped = createSshEditContent(w, ss[0], &(*(*config.Yml.Log.Group)[i].Ssh)[si], func(name string) {
-		// [ssh名称][是否选中][分组坐标][链接坐标]
-		_ = bStr.Set(fmt.Sprintf("%s,%t,%d,%d", name, onOff, i, si))
+		// [ssh名称][分组坐标][链接坐标]
+		_ = bStr.Set(fmt.Sprintf("%s,%d,%d", name, i, si))
 		list.Refresh()
 	}).Show
 }

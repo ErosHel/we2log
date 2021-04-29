@@ -53,7 +53,7 @@ func CreateMainWindow(w fyne.Window, a *fyne.App) fyne.CanvasObject {
 
 	list := getGroupBindList()
 	groupList := widget.NewListWithData(list, func() fyne.CanvasObject {
-		return createGroupItem(w, list)
+		return createGroupItem(w)
 	}, updateGroupItem)
 	groupList.Move(fyne.NewPos(0, 42))
 	groupList.Resize(fyne.NewSize(313, 445))
@@ -108,14 +108,14 @@ func getGroupNameInfo() []string {
 	groups := *config.Yml.Log.Group
 	ss := make([]string, len(groups))
 	for i, group := range groups {
-		// [ssh名称][是否选中][分组坐标]
-		ss[i] = fmt.Sprintf("%s,%t,%d", group.Name, group.OnOff, i)
+		// [group名称][分组坐标]
+		ss[i] = fmt.Sprintf("%s,%d", group.Name, i)
 	}
 	return ss
 }
 
 // 创建分组的元素
-func createGroupItem(w fyne.Window, list binding.StringList) fyne.CanvasObject {
+func createGroupItem(w fyne.Window) fyne.CanvasObject {
 	// 分组名称
 	groupName := widget.NewLabel("")
 	// 开启按钮
@@ -136,13 +136,13 @@ func updateGroupItem(item binding.DataItem, object fyne.CanvasObject) {
 	con := object.(*fyne.Container)
 	label := con.Objects[0].(*widget.Label)
 	s, _ := item.(binding.String).Get()
-	// [ssh名称][是否选中][分组坐标]
+	// [group名称][分组坐标]
 	ss := strings.Split(s, ",")
 	label.SetText(ss[0])
+	i, _ := strconv.Atoi(ss[1])
+	onOff := (*config.Yml.Log.Group)[i].OnOff
 	check := con.Objects[1].(*widget.Check)
-	onOff := ss[1] == "true"
 	check.SetChecked(onOff)
-	i, _ := strconv.Atoi(ss[2])
 	// 改变开启状态
 	check.OnChanged = func(sel bool) {
 		(*config.Yml.Log.Group)[i].OnOff = sel
@@ -186,10 +186,10 @@ func buildLogWindow(a *fyne.App) {
 			}
 			groupOnMap[group.Name] = true
 			w := (*a).NewWindow(group.Name)
-			w.SetContent(logView(group.Name))
+			w.SetContent(logView(group.Name, w))
 			w.Resize(fyne.NewSize(1024, 648))
 			w.CenterOnScreen()
-			w.SetFixedSize(true)
+			//w.SetFixedSize(true)
 			// 显示窗口
 			w.Show()
 			logWin = append(logWin, w)
