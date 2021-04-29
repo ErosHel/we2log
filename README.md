@@ -46,7 +46,7 @@
 | log.size  | 字体字号大小(默认11) |
 | log.group.name  | 分组名称 |
 | log.group.on-off  | 分组是否开启 |
-| log.group.ssh.name  | ssh链接是否开启 |
+| log.group.ssh.name  | ssh链接名称(用作打印时做前缀识别) |
 | log.group.ssh.host  | ssh服务器ip地址 |
 | log.group.ssh.port  | ssh服务器端口 |
 | log.group.ssh.username  | ssh服务器用户 |
