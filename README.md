@@ -10,20 +10,22 @@
 
 多个分组对应如同多个微服务
 
-<img src="./doc/img/we2log_main.png" style="width: 200px;"/>
+![image](./doc/img/we2log_main.png)
+
 ### 分组ssh链接界面
 
 可添加和修改ssh链接
 
-<img src="./doc/img/we2log_ssh.png" style="width: 200px;"/>
+![image](./doc/img/we2log_ssh.png)
 
 ### ssh链接添加或修改界面
 
-<img src="./doc/img/we2log_ssh_add.png" style="width: 200px;"/>
+![image](./doc/img/we2log_ssh_add.png)
 
 ### 日志打印界面
 
 红圈的1和2就是分组admin下，ssh连接中名称1和2服务器
+
 ![image](./doc/img/we2log_log.png)
 
 ## 日志窗口快捷键
