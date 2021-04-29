@@ -2,19 +2,19 @@
 
 [![GitHub license](https://img.shields.io/github/license/ErosHel/we2log?style=flat-square)](https://github.com/ErosHel/we2log/blob/master/LICENSE)
 
-解决多台相同服务之间的日志临时查看不方便，多窗口打开麻烦，使用ssh链接并命令`tail -f`监听日志文件，并把**相同服务的日志输出进行融合**
+解决多台相同服务之间的日志临时查看不方便，多窗口打开麻烦，使用ssh链接并命令`tail -f`监听日志文件，并把**相同服务的日志输出进行合并**，项目使用的是开源框架 [fyne](https://github.com/fyne-io/fyne) 进行编写。
 
 ## 演示界面
 
 ### 主设置界面
 
-多个分组对应如同多个微服务
+多个分组对应如同多个微服务，一个分组启动时会额外生成一个窗口
 
 ![image](./doc/img/we2log_main.png)
 
 ### 分组ssh链接界面
 
-可添加和修改ssh链接
+可添加和修改ssh链接，一个分组下的日志会进行合并输出
 
 ![image](./doc/img/we2log_ssh.png)
 
