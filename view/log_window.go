@@ -74,7 +74,7 @@ func LogThemeChange() {
 	}
 }
 
-// 日志暂停或者继续
+// 日志全屏
 func logFull(group string, w fyne.Window) {
 	info := winInfoMap[group]
 	info.logFull = !info.logFull
