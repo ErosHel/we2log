@@ -107,7 +107,7 @@ func onChange(group string, list *fyne.Container, after func()) {
 		if !winInfoMap[group].logStatus {
 			continue
 		}
-		text := getText(group, &m)
+		text := getText(&m)
 		if point < lines {
 			list.Add(text)
 			point++
@@ -127,7 +127,7 @@ func onChange(group string, list *fyne.Container, after func()) {
 }
 
 // 获取文本及对应颜色
-func getText(group string, msg *string) *canvas.Text {
+func getText(msg *string) *canvas.Text {
 	var c color.Color
 	switch {
 	case strings.Contains(*msg, "INFO"):
