@@ -10,16 +10,16 @@
 
 多个分组对应如同多个微服务
 
-<img src="./doc/img/we2log_main.png" style="width: 400px;"/>
+<img src="./doc/img/we2log_main.png" style="width: 200px;"/>
 ### 分组ssh链接界面
 
 可添加和修改ssh链接
 
-<img src="./doc/img/we2log_ssh.png" style="width: 400px;"/>
+<img src="./doc/img/we2log_ssh.png" style="width: 200px;"/>
 
 ### ssh链接添加或修改界面
 
-<img src="./doc/img/we2log_ssh_add.png" style="width: 400px;"/>
+<img src="./doc/img/we2log_ssh_add.png" style="width: 200px;"/>
 
 ### 日志打印界面
 
