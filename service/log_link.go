@@ -78,16 +78,6 @@ func GetSshGroups() []string {
 	return grs
 }
 
-// IsGroupOn 分组是否开启
-func IsGroupOn(g string) bool {
-	for _, group := range groups {
-		if group == g {
-			return true
-		}
-	}
-	return false
-}
-
 // 推送消息
 func pushMsg(name string, out *io.Reader, group string) {
 	msgChan := MsgChanMap[group]
