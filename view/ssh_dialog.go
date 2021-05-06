@@ -48,7 +48,8 @@ func createSshContent(w fyne.Window, group string) dialog.Dialog {
 					break
 				}
 			}
-			_ = list.Append(fmt.Sprintf("%s,%t,%d,%d", name, conf.OnOff, gIndex, sshIndex))
+			// [ssh名称][分组坐标][链接坐标]
+			_ = list.Append(fmt.Sprintf("%s,%d,%d", name, gIndex, sshIndex))
 			groupList.Refresh()
 			config.SaveLocalCache()
 		}).Show()
